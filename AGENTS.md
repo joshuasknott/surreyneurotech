@@ -1,30 +1,36 @@
-# Surrey Societies
+# Working guide
 
-Three distinct Astro sites share packages and a Convex backend. Confirm the requested society, edited app, preview URL, build, and screenshots all match.
+This repository owns the Surrey Neurotech public website and its standalone committee applications service.
 
-## Commands and scope
+## Scope
 
-Use npm workspaces and package-lock.json.
+- `apps/neurotech` is the public site at `https://surreyneurotechsociety.org`.
+- `apps/neurotech-applications` is a separate recruitment service and Vercel project.
+- `packages/admin`, `packages/assistant`, and `packages/ui` are local workspace packages required by the website.
+- The website reads published data from the existing shared Convex deployment through `CONVEX_URL`. Do not add a local Convex schema or deploy a second backend as part of ordinary Neurotech work.
 
-| Site | Source | Development | Build |
-| --- | --- | --- | --- |
-| AI | apps/ai | `npm run dev:ai` | `npm run build:ai` |
-| Business | apps/business | `npm run dev:business` | `npm run build:business` |
-| Neurotech | apps/neurotech | `npm run dev:neurotech` | `npm run build:neurotech` |
+## Commands
 
-Use `npm run typecheck` and `npm test` for affected shared logic; `npm run test:e2e` for changed user flows. Shared changes may require `npm run build:all`. Use the actual server output to identify each preview port. Keep requested previews running through handoff.
+Use npm and Node.js 22.12 or newer.
 
-## Design and data
+| Check | Command |
+| --- | --- |
+| Website development | `npm run dev:neurotech` |
+| Applications development | `npm run dev:neurotech-applications` |
+| TypeScript | `npm run typecheck` |
+| Unit tests | `npm test` |
+| Website build | `npm run build:neurotech` |
+| Applications build | `npm run build:neurotech-applications` |
+| Website browser checks | `npm run e2e:site` |
+| Applications browser checks | `npm run e2e:applications` |
 
-- Use the selected mockup, existing assets, and current user direction. Public society pages can be expressive. Keep events and join actions visible early. There is no per-site admin CMS in the public product.
-- For substantial design work, consult [.agents/skills/surreysocieties-design/SKILL.md](.agents/skills/surreysocieties-design/SKILL.md). Small fixes do not need a new design brief or reference hunt.
-- For an existing /ai robot-head hero, Three.js owns the robot; Anime.js is for scroll/reveal choreography. Preserve reduced-motion fallback.
-- Inspect affected desktop/mobile views before UI handoff. Preserve society labels, asset identity, accessible controls, and member-data privacy.
-- Confirm the intended deployment before data mutations. Public sites do not ship an admin CMS UI.
+Run affected checks after changes. Run both builds for shared package changes.
 
-<!-- convex-ai-start -->
-When changing Convex code, read convex/_generated/ai/guidelines.md and the applicable Convex skill. Keep generated files generated. A missing optional skill is not a reason to reinstall tooling or block unrelated frontend work.
-<!-- convex-ai-end -->
+## Safety
 
-
-Installed Convex skills provide task-specific technical guidance. A complex fix already authorized by the user does not need a second approval just because a skill suggests presenting options. Prepare and verify local changes within scope; pause only the step that needs missing credentials, a material product decision, or ungranted production authority.
+- Never commit `.env*`, `.vercel`, provider keys, email credentials, Blob tokens, or Convex secrets.
+- Keep production project IDs, domains, databases, storage, and environment values unchanged during source-only migrations.
+- Do not publish private committee application data or internal planning documents.
+- Avoid inventing events, committee members, research access, equipment access, outcomes, or institutional claims.
+- Preserve accessible controls, reduced-motion behaviour, the public site’s visual identity, and honest empty states.
+- Confirm the target Vercel project before any production deployment. A successful local build is not production evidence.

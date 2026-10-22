@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 import { BrainCircuit } from 'lucide-astro';
 import { getSocietyById } from '@surreysocieties/admin/config';
 import { queryPublicConvex } from '@surreysocieties/admin';
-import { api } from '../../../../convex/_generated/api.js';
+import { makeFunctionReference } from 'convex/server';
 import Layout from '../layouts/Layout.astro';
 import NeurotechCommunity from '../components/NeurotechCommunity.astro';
 import heroImage from '../assets/showcase/neurotech-hero-lab.png';
@@ -19,7 +19,21 @@ const SOCIETY_ID = 'neurotech';
 const society = getSocietyById(SOCIETY_ID)!;
 Astro.response.headers.set('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
 
-const committee = await queryPublicConvex(api.committee.listActive, { societySlug: SOCIETY_ID }, []);
+type PublicCommitteeMember = {
+  name: string;
+  role: string;
+  bio?: string;
+  image?: string;
+  imageUrl?: string | null;
+};
+
+const listActiveCommittee = makeFunctionReference<
+  'query',
+  { societySlug: string },
+  PublicCommitteeMember[]
+>('committee:listActive');
+
+const committee = await queryPublicConvex(listActiveCommittee, { societySlug: SOCIETY_ID }, []);
 
 const activityRows = [
   {

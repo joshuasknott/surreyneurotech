@@ -4,8 +4,8 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const society = process.argv[2];
-if (!['ai', 'business', 'neurotech'].includes(society)) {
-  throw new Error('Specify one society: ai, business, or neurotech.');
+if (society !== 'neurotech') {
+  throw new Error('Specify the Neurotech site: neurotech.');
 }
 
 const root = fileURLToPath(new URL('../', import.meta.url));

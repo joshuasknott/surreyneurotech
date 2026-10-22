@@ -1,5 +1,5 @@
 {
-  "name": "surreysocieties",
+  "name": "surreyneurotech",
   "private": true,
   "type": "module",
   "version": "0.0.1",
@@ -7,24 +7,24 @@
     "node": ">=22.12.0"
   },
   "workspaces": [
-    "apps/*",
+    "apps/neurotech",
+    "apps/neurotech-applications",
     "packages/*"
   ],
   "scripts": {
-    "dev:ai": "npm run dev -w apps/ai",
-    "dev:business": "npm run dev -w apps/business",
     "dev:neurotech": "npm run dev -w apps/neurotech",
     "dev:neurotech-applications": "npm run dev -w apps/neurotech-applications -- --port 4324",
-    "build:ai": "npm run build -w apps/ai",
-    "build:business": "npm run build -w apps/business",
     "build:neurotech": "npm run build -w apps/neurotech",
     "build:neurotech-applications": "npm run build -w apps/neurotech-applications",
-    "build:all": "npm run build -w apps/ai && npm run build -w apps/business && npm run build -w apps/neurotech",
+    "build": "npm run build:neurotech && npm run build:neurotech-applications",
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "e2e": "npm run test:e2e"
+    "e2e": "npm run test:e2e",
+    "e2e:site": "playwright test --config playwright.config.ts",
+    "e2e:applications": "playwright test --config playwright.neurotech-applications.config.ts",
+    "build:vercel": "node scripts/build-vercel.mjs neurotech"
   },
   "overrides": {
     "esbuild": "0.28.1",

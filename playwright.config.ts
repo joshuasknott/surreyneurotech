@@ -20,20 +20,6 @@ export default defineConfig({
   },
   webServer: [
     {
-      command: `npm run dev -w apps/ai -- --host ${previewHost}`,
-      env: webServerEnv,
-      url: `http://${previewHost}:4321`,
-      reuseExistingServer: !isCI,
-      timeout: 120_000,
-    },
-    {
-      command: `npm run dev -w apps/business -- --host ${previewHost}`,
-      env: webServerEnv,
-      url: `http://${previewHost}:4322`,
-      reuseExistingServer: !isCI,
-      timeout: 120_000,
-    },
-    {
       command: `npm run dev -w apps/neurotech -- --host ${previewHost}`,
       env: webServerEnv,
       url: `http://${previewHost}:4323`,
@@ -45,6 +31,12 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      testMatch: [
+        '**/launch.spec.ts',
+        '**/font-loading.spec.ts',
+        '**/neurotech-committee-applications.spec.ts',
+        '**/neurotech-editorial.spec.ts',
+      ],
     },
   ],
 });

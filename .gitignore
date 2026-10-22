@@ -1,6 +1,10 @@
 # build output
 dist/
 .vercel/
+output/
+test-results/
+playwright-report/
+.playwright-cli/
 # generated types
 .astro/
 
@@ -13,16 +17,16 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 *.log
-test-results/
-playwright-report/
-.playwright-cli/
-output/
 .codex/
 
 
 # environment variables
 .env
-.env.production
+.env.*
+!.env.example
+.dev.vars*
+.wrangler/
+.wrangler-state/
 
 # macOS-specific files
 .DS_Store
@@ -38,11 +42,18 @@ output/
 # Convex
 .convex/
 
-.env.local
-
 # TypeScript build outputs (compiled from .ts sources; _generated/ stays tracked)
 convex/*.js
 convex/*.js.map
 convex/*.d.ts
 convex/*.d.ts.map
 **/tsconfig.tsbuildinfo
+
+# Private runtime configuration and independent app caches
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+.wrangler/
+coverage/
+playwright-report/

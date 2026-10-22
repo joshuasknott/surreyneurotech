@@ -8,24 +8,6 @@ const previewHost = process.env.E2E_HOST || '127.0.0.1';
 
 const sites = [
   {
-    key: 'ai',
-    name: 'AI',
-    origin: `http://${previewHost}:4321`,
-    unionUrl: 'https://surreyunion.org/your-activity/clubs-and-societies-a-z/artificial-intelligence-society',
-    linktreeUrl: 'https://linktr.ee/surreyaisociety',
-    joinUrl: 'https://surreyunion.org/shop/artificial-intelligence-society/9a8a30d9-b5e2-4d40-a864-8e688f5a306a',
-    hasThemeToggle: false,
-  },
-  {
-    key: 'business',
-    name: 'Business',
-    origin: process.env.BUSINESS_E2E_ORIGIN || `http://${previewHost}:4322`,
-    unionUrl: 'https://surreyunion.org/your-activity/clubs-and-societies-a-z/business-society',
-    linktreeUrl: 'https://linktr.ee/surreybusinesssociety',
-    joinUrl: 'https://chat.whatsapp.com/IIk88Q5Y2Du65aC5wmkAPE',
-    hasThemeToggle: false,
-  },
-  {
     key: 'neurotech',
     name: 'Neurotech',
     origin: process.env.E2E_NEUROTECH_ORIGIN || `http://${previewHost}:4323`,

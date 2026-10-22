@@ -1,9 +1,6 @@
 import { expect, test, type Route } from '@playwright/test';
 
 const pages = [
-  { name: 'AI', url: 'http://127.0.0.1:4321/', text: 'Surrey AI Society' },
-  { name: 'planner', url: 'http://127.0.0.1:4321/committee/planner', text: 'Committee planner' },
-  { name: 'Business', url: 'http://127.0.0.1:4322/', text: 'Surrey Business Society' },
   { name: 'Neurotech', url: 'http://127.0.0.1:4323/', text: 'Surrey Neurotech Society' },
 ];
 
